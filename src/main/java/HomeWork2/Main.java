@@ -8,7 +8,7 @@ public class Main {
     private static final int NECESSARY_SIZE = 4;
     private static final Random random = new Random();
 
-    public static void main(String[] args) throws MyArrayDataException {
+    public static void main(String[] args) {
         String[][] strings;
         int size = random.nextInt(3,5);
         strings = new String[size][size];
@@ -29,14 +29,18 @@ public class Main {
             if (strings.length != NECESSARY_SIZE) {
                 throw new MyArraySizeException(size);
             }
-        } catch (MyArraySizeException e) {
+        } catch (MyArraySizeException | MyArrayDataException e) {
             e.printStackTrace();
         }
 
         for (String[] string : strings) {
             System.out.println(Arrays.toString(string));
         }
-        System.out.println(CheckSum(strings));
+        try {
+            System.out.println(CheckSum(strings));
+        } catch (MyArrayDataException e) {
+            e.printStackTrace();
+        }
 
     }
 
